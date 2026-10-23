@@ -2,101 +2,117 @@ Retail Sales Forecasting Using Machine Learning
 
 Project Overview
 
-This project analyzes historical retail sales data and builds machine learning regression models to predict sales quantities.
+An end-to-end machine learning project that analyzes historical retail sales data and predicts future sales using time-series forecasting techniques.
 
-The project includes data preprocessing, exploratory data analysis, feature engineering, model training, evaluation, visualization, and a Streamlit dashboard.
+The project includes feature engineering, machine learning model comparison, hyperparameter tuning, walk-forward validation, seven-day forecasting, and an interactive Streamlit dashboard.
 
 Dataset
 
-Dataset: Store Sales – Time Series Forecasting
-Source: Kaggle
+Dataset: Store Sales – Time Series Forecasting (Kaggle)
 
-Dataset Link: https://www.kaggle.com/competitions/store-sales-time-series-forecasting/data
+The original dataset contains approximately 3 million sales records.
 
-Download train.csv from Kaggle.
-
-Place train.csv inside the data folder before running sales_forecasting.py.
-The dataset contains historical sales records with information such as dates, stores, product families, and promotions.
+Daily sales are aggregated to create a time-series dataset for forecasting total sales quantities.
 
 Technologies Used
 
 - Python
-- Pandas and NumPy
-- Matplotlib and Seaborn
+- Pandas
+- NumPy
 - Scikit-learn
+- Matplotlib
 - Streamlit
+- Joblib
+- Git and GitHub
 
-Machine Learning Models
+Machine Learning Techniques
 
-Four regression algorithms were evaluated:
+1. Data Preprocessing
 
-1. Linear Regression
-2. Decision Tree Regressor
-3. Random Forest Regressor
-4. K-Nearest Neighbors Regressor
+- Data cleaning and preparation
+- Daily sales aggregation
+- Chronological data splitting
 
-Feature Engineering
+2. Feature Engineering
 
-The project uses calendar-based features, store information, product families, and promotional information.
+- Lag features: 1, 7, 14, and 30 days
+- Rolling averages: 7, 14, and 30 days
+- Calendar-based features
 
-Model Evaluation
+3. Model Development
 
-A date-based train/test split was used for evaluation.
+- Random Forest Regressor
+- HistGradientBoosting Regressor
+- Seasonal Naive Baseline
 
-The model experiment uses a subset of 20,000 rows from the original dataset.
+4. Model Optimization
 
-Best Model: Random Forest
+- RandomizedSearchCV
+- TimeSeriesSplit
+- Hyperparameter tuning
 
-Evaluation Metric| Result
-MAE| 104.33
-RMSE| 285.20
-R² Score| 0.9415
+5. Model Evaluation
 
-These results describe performance on the selected test subset and do not guarantee future forecasting accuracy.
+- Mean Absolute Error (MAE)
+- Chronological train-test evaluation
+- Walk-forward backtesting
+- Seven-day recursive forecasting evaluation
+- Comparison with a seasonal baseline
 
-Visualizations
+Seven-Day Forecast Backtesting Results
 
-Top 10 Product Families
+The model was evaluated across three seven-day forecasting windows.
 
-"Top 10 Sales" (top_10_sales.png)
+Metric| Average MAE
+Machine Learning Model| 48,937.47
+Seasonal Baseline| 64,294.05
 
-Monthly Sales Trend
+The ML model achieved approximately 23.9% lower average MAE than the seasonal baseline across these three evaluation windows.
 
-"Monthly Sales" (monthly_sales.png)
+The baseline performed better in one of the three windows, so the results should not be interpreted as guaranteed performance on unseen future data.
 
-Model Comparison
+Interactive Dashboard
 
-"Model Comparison" (model_comparison.png)
+The Streamlit dashboard presents:
 
-Actual vs Predicted Sales
+- Model performance
+- Walk-forward backtesting
+- Seven-day sales forecasts
+- Seven-day backtesting results
+- Model and baseline MAE comparisons
 
-"Actual vs Predicted" (actual_vs_predicted.png)
+Project Files
 
-Dashboard
+File| Description
+"advanced_forecasting.py"| Feature engineering, training, evaluation, and forecasting
+"advanced_dashboard.py"| Interactive Streamlit dashboard
+"seven_day_backtest.py"| Seven-day recursive forecasting evaluation
+"seven_day_backtest_results.csv"| Backtesting metrics
+"seven_day_backtest.png"| Backtesting visualization
+"walk_forward_results.csv"| Walk-forward evaluation results
+"future_7_day_forecast.csv"| Seven-day forecast output
+"future_7_day_forecast.png"| Forecast visualization
 
-A Streamlit dashboard displays model evaluation metrics, model comparisons, and sales visualizations.
+How to Run
 
-Run the Project
+1. Download the Kaggle Store Sales – Time Series Forecasting dataset.
+2. Place "train.csv" inside the project's "data" folder.
+3. Install the required Python dependencies.
+4. Run "advanced_forecasting.py".
+5. Run "seven_day_backtest.py".
+6. Launch the dashboard using:
 
-Install the required libraries:
-
-pip install -r requirements.txt
-
-Run the machine learning project:
-
-python sales_forecasting.py
-
-Launch the dashboard:
-
-python -m streamlit run dashboard.py
+python -m streamlit run advanced_dashboard.py
 
 Limitations
 
-- Model training uses a 20,000-row subset rather than the complete dataset.
-- The current model uses historical records and a limited date-based evaluation.
-- Additional testing across longer future periods is needed before using the model for production forecasting.
-- Predictions represent sales quantities, not monetary revenue.
+- The project predicts aggregated daily sales quantities rather than individual store-level sales.
+- The seven-day backtesting evaluation uses three historical windows.
+- Forecast dates follow the historical dataset period rather than the current calendar date.
+- The system is a portfolio demonstration and is not a production forecasting service.
 
 Conclusion
 
-This project demonstrates an end-to-end machine learning workflow for retail sales analysis and regression modeling, supported by visualizations and a Streamlit dashboard.
+This project demonstrates practical machine learning and time-series forecasting skills, including data preprocessing, feature engineering, model training, hyperparameter optimization, baseline comparisons, backtesting, forecasting, and dashboard development.
+
+Project Category: Machine Learning | Time Series Forecasting | Retail Analytics
