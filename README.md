@@ -11,6 +11,11 @@ Dataset
 Dataset: Store Sales – Time Series Forecasting
 Source: Kaggle
 
+Dataset Link: https://www.kaggle.com/competitions/store-sales-time-series-forecasting/data
+
+Download train.csv from Kaggle.
+
+Place train.csv inside the data folder before running sales_forecasting.py.
 The dataset contains historical sales records with information such as dates, stores, product families, and promotions.
 
 Technologies Used
